@@ -11,7 +11,7 @@
   , typename Val
   >
   struct 
-key_val
+key_val_tpl
   //This is, essentially, element<std::size_t Key,Val>
   //here:
   //  https://github.com/ldionne/hana/blob/master/include/boost/hana/detail/closure.hpp#L20
@@ -31,9 +31,9 @@ map
   >
   struct 
 map
-  < key_val<Key,Val>...
+  < key_val_tpl<Key,Val>...
   >
-  : key_val<Key,Val>...
+  : key_val_tpl<Key,Val>...
     //This is, essentially, how tuple is implemented, but with
     //std::size_t's instead of Key.
     //See:
@@ -54,18 +54,18 @@ https://github.com/ldionne/hana/blob/master/include/boost/hana/detail/closure.hp
  
 template <typename Key, typename Xn>
 static constexpr Xn const&
-get(key_val<Key, Xn> const& x)
+get(key_val_tpl<Key, Xn> const& x)
 { return x.get; }
 
 template <typename Key, typename Xn>
 static constexpr Xn&
-get(key_val<Key, Xn>& x)
+get(key_val_tpl<Key, Xn>& x)
 { return x.get; }
 
 template <typename Key, typename Xn>
 static constexpr Xn&&
-get(key_val<Key, Xn>&& x)
-{ return static_cast<key_val<Key, Xn>&&>(x).get; }
+get(key_val_tpl<Key, Xn>&& x)
+{ return static_cast<key_val_tpl<Key, Xn>&&>(x).get; }
 //} gets:
 
 //********test it*****************
@@ -96,10 +96,10 @@ using namespace boost::hana;
 int main()
 {
       map
-      < key_val<_uint<1>, data_val<1> >
-      , key_val<_uint<2>, data_val<2> >
-      , key_val<_uint<3>, data_val<3> >
-      , key_val<_uint<4>, data_val<4> >
+      < key_val_tpl<_uint<1>, data_val<1> >
+      , key_val_tpl<_uint<2>, data_val<2> >
+      , key_val_tpl<_uint<3>, data_val<3> >
+      , key_val_tpl<_uint<4>, data_val<4> >
       >
     mud
       ;

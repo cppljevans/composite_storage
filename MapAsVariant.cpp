@@ -1,8 +1,7 @@
 //Purpose:
 //  See if a variant can be implemented as close as
 //  possible to a tuple.
-#include <iostream>
-#include <type_traits>
+#include <algorithm> //for std::max
 #include "./map_index_type.hpp"
 
 namespace composite_storage
@@ -223,10 +222,11 @@ struct map
 
 using namespace composite_storage;
 
+#include "./data_val.hpp"
 template<std::size_t Index>
 using ndx_t=std::integral_constant<std::size_t,Index>;
 
-#include "./data_val.hpp"
+//********test it*****************
     
 int main(int argc, const char * argv[])
 {

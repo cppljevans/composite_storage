@@ -3,8 +3,7 @@
 //  possible to a tuple.
 #include <iostream>
 #include <type_traits>
-#include <boost/hana/type.hpp>
-#include "map_index_type.hpp"
+#include "./map_index_type.hpp"
 
 namespace composite_storage
 {
@@ -181,7 +180,7 @@ struct map
         < typename SomeKey
         >
       map
-        ( boost::hana::_type<SomeKey>
+        ( SomeKey
         )
         { 
           construct_at_key<SomeKey>(*this);
@@ -227,7 +226,7 @@ using namespace composite_storage;
 template<std::size_t Index>
 using ndx_t=std::integral_constant<std::size_t,Index>;
 
-#include "data_val.hpp"
+#include "./data_val.hpp"
     
 int main(int argc, const char * argv[])
 {
@@ -236,7 +235,7 @@ int main(int argc, const char * argv[])
       , key_val_var<ndx_t<1>,data_val<1>>
       , key_val_var<ndx_t<2>,data_val<2>>
       >
-    cs_v(boost::hana::type<ndx_t<1> >);
+    cs_v(ndx_t<1>{});
     std::cout<<":which@val<1>="<<cs_v.which()<<"\n";
     std::cout<<":val<1>="<<*(cs_v.get_ptr<ndx_t<1>>())<<"\n";
     std::cout<<":val<0>*="<<cs_v.get_ptr<ndx_t<0>>()<<"\n";

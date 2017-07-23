@@ -68,46 +68,27 @@ get(key_val_tpl<Key, Xn>&& x)
 { return static_cast<key_val_tpl<Key, Xn>&&>(x).get; }
 //} gets:
 
-//********test it*****************
-#include <iostream>
-template<unsigned TagVal>
-struct data_val
-//Represents some arbitrary data value.
-{
-};
+#include "./data_val.hpp"
+template<std::size_t Index>
+using ndx_t=std::integral_constant<std::size_t,Index>;
 
-  template<unsigned TagVal>
-  std::ostream&
-operator<<
-  ( std::ostream&sout
-  , data_val<TagVal>const&
-  )
-  {
-    
-    sout
-      <<"data_val<"
-      <<TagVal
-      <<">";
-    return sout;
-  }
-#include <boost/hana/fwd/integral_constant.hpp>
-using namespace boost::hana;
+//********test it*****************
 
 int main()
 {
       map
-      < key_val_tpl<_uint<1>, data_val<1> >
-      , key_val_tpl<_uint<2>, data_val<2> >
-      , key_val_tpl<_uint<3>, data_val<3> >
-      , key_val_tpl<_uint<4>, data_val<4> >
+      < key_val_tpl<ndx_t<1>, data_val<1> >
+      , key_val_tpl<ndx_t<2>, data_val<2> >
+      , key_val_tpl<ndx_t<3>, data_val<3> >
+      , key_val_tpl<ndx_t<4>, data_val<4> >
       >
     mud
       ;
     std::cout
-      <<get<_uint<1>>(mud)<<"\n"
-      <<get<_uint<2>>(mud)<<"\n"
-      <<get<_uint<3>>(mud)<<"\n"
-      <<get<_uint<4>>(mud)<<"\n"
+      <<get<ndx_t<1>>(mud)<<"\n"
+      <<get<ndx_t<2>>(mud)<<"\n"
+      <<get<ndx_t<3>>(mud)<<"\n"
+      <<get<ndx_t<4>>(mud)<<"\n"
       ;
     return 0;
 }    

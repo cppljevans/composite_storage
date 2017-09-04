@@ -1,3 +1,5 @@
+#ifndef MAPASTUPLE_HPP_INCLUDED_2017_09_03
+#define MAPASTUPLE_HPP_INCLUDED_2017_09_03
 //Purpose:
 //  See if a map can be implemented similar to a tuple
 //  implemented as a multiply inherited pairs where
@@ -6,16 +8,23 @@
 //  the first element of the pair(the key) is a type
 //  instead of a std::size_t.
 //
+#include <utility>
+
   template
   < typename Key
   , typename Val
   >
   struct 
 key_val_tpl
-  //This is, essentially, element<std::size_t Key,Val>
-  //here:
-  //  https://github.com/ldionne/hana/blob/master/include/boost/hana/detail/closure.hpp#L20
-  //except instead of typename Key, std::size_t Key is used.
+  //Purpose:
+  //  Key Value pair for map-like container similar to a tuple.
+  //  However, instead of an numerical index, a type, Key,
+  //  is the index.
+  //References:
+  //  This is, essentially, element<std::size_t Key,Val>
+  //  here:
+  //    https://github.com/ldionne/hana/blob/master/include/boost/hana/detail/closure.hpp#L20
+  //  except instead of typename Key, std::size_t Key is used.
   {
     Val get;
   };
@@ -41,6 +50,14 @@ map
     //  https://github.com/ldionne/hana/blob/master/include/boost/hana/detail/closure.hpp#L26
     //  
   {
+    map()
+      {}
+    map( key_val_tpl<Key,Val>&&... vals)
+      : key_val_tpl<Key,Val>
+        ( std::forward<key_val_tpl<Key,Val>>
+          (vals)
+        )...
+      {}
   };
   
 //{ gets:
@@ -72,23 +89,4 @@ get(key_val_tpl<Key, Xn>&& x)
 template<std::size_t Index>
 using ndx_t=std::integral_constant<std::size_t,Index>;
 
-//********test it*****************
-
-int main()
-{
-      map
-      < key_val_tpl<ndx_t<1>, data_val<1> >
-      , key_val_tpl<ndx_t<2>, data_val<2> >
-      , key_val_tpl<ndx_t<3>, data_val<3> >
-      , key_val_tpl<ndx_t<4>, data_val<4> >
-      >
-    mud
-      ;
-    std::cout
-      <<get<ndx_t<1>>(mud)<<"\n"
-      <<get<ndx_t<2>>(mud)<<"\n"
-      <<get<ndx_t<3>>(mud)<<"\n"
-      <<get<ndx_t<4>>(mud)<<"\n"
-      ;
-    return 0;
-}    
+#endif//MAPASTUPLE_HPP_INCLUDED_2017_09_03

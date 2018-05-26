@@ -9,6 +9,17 @@ namespace composite_storage
 
   template <typename Key, typename Val>
 struct key_val_var
+  //Purpose:
+  //  Key Value pair for map-like container similar to a variant.
+  //  However, instead of an numerical index, a type, Key,
+  //  is the index.
+  //Design:
+  //  It differs from key_val_tpl by *not* containing:
+  //    Val get;
+  //  because the container, of which this is a superclass,
+  //  can only hold 1 of a number of types; hence, the storage
+  //  for the value is passed up from the container to the
+  //  *protected* construct, destruct methods.
   {
   public:
       using key=Key;

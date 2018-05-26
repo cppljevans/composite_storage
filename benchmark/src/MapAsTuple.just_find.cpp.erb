@@ -1,0 +1,31 @@
+//Purpose:
+//  Benchmark MapAsTuple.hpp
+//================
+
+#include "../../MapAsTuple.hpp"
+#include <type_traits>
+
+template <int X>
+struct equals_to {
+    template<typename Y>
+    constexpr std::integral_constant<bool, X == Y::value>
+    operator()(Y const&) const;
+};
+
+struct undefined {};
+
+int main() {
+<% env[:k].times do |k| %>
+    <% ints = ((k*n+1)..(k*n+n)).to_a %>
+
+    constexpr auto <%= "xs#{k}" %> = make_map(
+        <%= ints.map { |i|
+            "key_val_tpl<std::integral_constant<int, #{i}>, undefined>{}"
+        }.join(', ') %>
+    );
+
+#if defined(METABENCH)
+    constexpr auto <%= "result#{k}" %> = get_val<std::integral_constant<int, <%= ints.last %> >>(<%= "xs#{k}" %>);
+#endif
+<% end %>
+}

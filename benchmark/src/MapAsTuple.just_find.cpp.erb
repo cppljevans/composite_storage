@@ -1,16 +1,10 @@
 //Purpose:
 //  Benchmark MapAsTuple.hpp
+//  measuring *just* get_val compile-time.
 //================
 
 #include "../../MapAsTuple.hpp"
 #include <type_traits>
-
-template <int X>
-struct equals_to {
-    template<typename Y>
-    constexpr std::integral_constant<bool, X == Y::value>
-    operator()(Y const&) const;
-};
 
 struct undefined {};
 

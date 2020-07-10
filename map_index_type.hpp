@@ -1,4 +1,4 @@
-//map of index to type.  No data.
+//map of index to type;  type_at_index; index_at_type. No data.
 #ifndef MAP_INDEX_TYPE_HPP_INCLUDED
 #define MAP_INDEX_TYPE_HPP_INCLUDED
 #include <utility>

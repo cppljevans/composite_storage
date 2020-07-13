@@ -1,6 +1,10 @@
-//map of index to type;  type_at_index; index_at_type. No data.
+// Copyright Larry Evans 2020
+// Distributed under the Boost Software License, Version 1.0.
+// (See license copy at http://boost.org/LICENSE_1_0.txt)
 #ifndef MAP_INDEX_TYPE_HPP_INCLUDED
 #define MAP_INDEX_TYPE_HPP_INCLUDED
+//Purpose:
+//  map of index to type;  type_at_index; index_at_type. No data.
 #include <utility>
 #include <type_traits>
 #include "pair_index_type.hpp"
@@ -42,4 +46,4 @@ namespace composite_storage
     index_at_type(pair_index_type<Index,Type>const&)
     ;
 }//exit composite_storage namespace
-#endif
+#endif//MAP_INDEX_TYPE_HPP_INCLUDED

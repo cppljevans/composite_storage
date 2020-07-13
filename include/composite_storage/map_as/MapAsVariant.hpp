@@ -1,3 +1,8 @@
+// Copyright Larry Evans 2020
+// Distributed under the Boost Software License, Version 1.0.
+// (See license copy at http://boost.org/LICENSE_1_0.txt)
+#ifndef MAPASVARIANT_HPP_INCLUDED_2017_09_03
+#define MAPASVARIANT_HPP_INCLUDED_2017_09_03
 //Purpose:
 //  Implement variant as close as possible to a tuple.
 #include <algorithm> //for std::max
@@ -236,3 +241,4 @@ struct map
   
 }//exit composite_storage namespace
 
+#endif//MAPASVARIANT_HPP_INCLUDED_2017_09_03
